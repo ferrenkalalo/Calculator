@@ -1,11 +1,11 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const Numbers = ({value, onPress}) => {
+const Numbers = ({value, onPressNumber}) => {
   return (
     <TouchableOpacity
       style={styles.number}
-      onPress={onPress}
+      onPress={onPressNumber}
       activeOpacity={0.4}>
       <Text style={styles.text}>{value}</Text>
     </TouchableOpacity>

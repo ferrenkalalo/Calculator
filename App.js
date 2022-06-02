@@ -1,21 +1,18 @@
 import {StyleSheet, Text, View, StatusBar} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Numbers from './Components/Numbers';
-import Operators from './Components/Operators';
+import Operatorions from './Components/Operations';
 
 const App = () => {
-  const [hasil, setHasil] = useState('');
-  const [hitung, setHitung] = useState('');
+  const [result, setResult] = useState('');
+  const [calculation, setCalculation] = useState('');
 
-  const calculation = () => {
-    setHitung(eval(2 + 2));
+  const numberClick = text => {
+    setResult(result + text);
   };
 
-  const input = value => {
-    if (value === '=') {
-      return calculation();
-    }
-    setHasil(hasil + '' + value);
+  const operationsClick = text => {
+    setResult(result + text);
   };
 
   return (
@@ -23,33 +20,38 @@ const App = () => {
       <StatusBar backgroundColor={'#354259'} barStyle="light-content" />
 
       <View style={styles.hasil}>
-        <Text style={styles.hasilText}>{hasil}</Text>
+        <View style={styles.kalkulasi}>
+          <Text style={styles.kalkulasiText}>{calculation}</Text>
+        </View>
+        <View>
+          <Text style={styles.hasilText}>{result}</Text>
+        </View>
       </View>
 
       <View style={{flex: 1}}>
         <View style={styles.container}>
-          <Operators
+          <Operatorions
             value={'('}
-            onPress={() => {
-              input('(');
+            onPressOperations={() => {
+              operationsClick('(');
             }}
           />
-          <Operators
+          <Operatorions
             value={')'}
-            onPress={() => {
-              input(')');
+            onPressOperations={() => {
+              operationsClick(')');
             }}
           />
-          <Operators
+          <Operatorions
             value={'/'}
-            onPress={() => {
-              input('/');
+            onPressOperations={() => {
+              operationsClick('/');
             }}
           />
-          <Operators
+          <Operatorions
             value={'x'}
-            onPress={() => {
-              input('x');
+            onPressOperations={() => {
+              operationsClick('*');
             }}
           />
         </View>
@@ -57,26 +59,26 @@ const App = () => {
         <View style={styles.container}>
           <Numbers
             value={7}
-            onPress={() => {
-              input(7);
+            onPressNumber={() => {
+              numberClick(7);
             }}
           />
           <Numbers
             value={8}
-            onPress={() => {
-              input(8);
+            onPressNumber={() => {
+              numberClick(8);
             }}
           />
           <Numbers
             value={9}
-            onPress={() => {
-              input(9);
+            onPressNumber={() => {
+              numberClick(9);
             }}
           />
-          <Operators
+          <Operatorions
             value={'+'}
-            onPress={() => {
-              input('+');
+            onPressOperations={() => {
+              operationsClick('+');
             }}
           />
         </View>
@@ -84,26 +86,26 @@ const App = () => {
         <View style={styles.container}>
           <Numbers
             value={4}
-            onPress={() => {
-              input(4);
+            onPressNumber={() => {
+              numberClick(4);
             }}
           />
           <Numbers
             value={5}
-            onPress={() => {
-              input(5);
+            onPressNumber={() => {
+              numberClick(5);
             }}
           />
           <Numbers
             value={6}
-            onPress={() => {
-              input(6);
+            onPressNumber={() => {
+              numberClick(6);
             }}
           />
-          <Operators
+          <Operatorions
             value={'-'}
-            onPress={() => {
-              input('-');
+            onPressOperations={() => {
+              operationsClick('-');
             }}
           />
         </View>
@@ -111,26 +113,26 @@ const App = () => {
         <View style={styles.container}>
           <Numbers
             value={1}
-            onPress={() => {
-              input(1);
+            onPressNumber={() => {
+              numberClick(1);
             }}
           />
           <Numbers
             value={2}
-            onPress={() => {
-              input(2);
+            onPressNumber={() => {
+              numberClick(2);
             }}
           />
           <Numbers
             value={3}
-            onPress={() => {
-              input(3);
+            onPressNumber={() => {
+              numberClick(3);
             }}
           />
-          <Operators
+          <Operatorions
             value={'='}
-            onPress={() => {
-              calculation;
+            onPressOperations={() => {
+              setCalculation(eval(result));
             }}
           />
         </View>
@@ -138,26 +140,27 @@ const App = () => {
         <View style={styles.container}>
           <Numbers
             value={0}
-            onPress={() => {
-              input(0);
+            onPressNumber={() => {
+              numberClick(0);
             }}
           />
           <Numbers
             value={'.'}
-            onPress={() => {
-              input('.');
+            onPressNumber={() => {
+              numberClick('.');
             }}
           />
           <Numbers
             value={'C'}
-            onPress={() => {
-              setHasil(hasil.slice(0, -1));
+            onPressNumber={() => {
+              setResult(result.slice(0, -1));
             }}
           />
           <Numbers
             value={'CA'}
-            onPress={() => {
-              setHasil('');
+            onPressNumber={() => {
+              setResult('');
+              setCalculation('');
             }}
           />
         </View>
@@ -173,22 +176,32 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#354259',
     padding: 10,
-    //justifyContent: 'center',
   },
   container: {
     flexDirection: 'row',
     marginVertical: 20,
   },
+  kalkulasi: {
+    flex: 0.6,
+    borderBottomWidth: 1.5,
+    borderBottomColor: '#C2DED1',
+  },
+  kalkulasiText: {
+    fontSize: 50,
+    color: '#C2DED1',
+    textAlign: 'right',
+    marginHorizontal: 10,
+  },
   hasil: {
-    flex: 0.4,
+    flex: 0.45,
     justifyContent: 'center',
     marginHorizontal: 10,
   },
   hasilText: {
-    fontSize: 60,
+    fontSize: 35,
     color: '#ECE5C7',
     textAlign: 'right',
-    paddingTop: 40,
+    paddingTop: 20,
     paddingRight: 20,
   },
 });

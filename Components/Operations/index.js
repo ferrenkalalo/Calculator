@@ -1,21 +1,21 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const Operators = ({value, onPress}) => {
+const Operatorions = ({value, onPressOperations}) => {
   return (
     <TouchableOpacity
-      style={styles.operator}
-      onPress={onPress}
+      style={styles.operations}
+      onPress={onPressOperations}
       activeOpacity={0.7}>
-      <Text style={styles.operatorText}>{value}</Text>
+      <Text style={styles.operationsText}>{value}</Text>
     </TouchableOpacity>
   );
 };
 
-export default Operators;
+export default Operatorions;
 
 const styles = StyleSheet.create({
-  operator: {
+  operations: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     margin: 3,
     borderRadius: 5,
   },
-  operatorText: {
+  operationsText: {
     color: '#354259',
     fontSize: 30,
   },
